@@ -6,7 +6,7 @@ class STEMSuspense extends StatelessWidget {
   final bool optionalCondtion;
   final Widget? loadingWidget;
   final Widget? errorWidget;
-  final Function(BuildContext widget) successWidget;
+  final WidgetBuilder successWidget;
 
   const STEMSuspense({
     Key? key,
