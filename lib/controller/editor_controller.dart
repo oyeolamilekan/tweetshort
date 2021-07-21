@@ -8,13 +8,13 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:tweetshort/services/api/api_error.dart';
-import 'package:tweetshort/styles/style.dart';
 
 import '../const/appstate.dart';
 import '../models/tweet_models.dart';
 import '../services/api/api.dart';
+import '../services/api/api_error.dart';
 import '../setup.dart';
+import '../styles/style.dart';
 
 class EditorController extends GetxController {
   String tweetId = '';
