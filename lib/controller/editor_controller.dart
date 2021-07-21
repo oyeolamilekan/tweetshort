@@ -91,7 +91,7 @@ class EditorController extends GetxController {
           globalKey.currentContext!.findRenderObject() as RenderRepaintBoundary;
 
       ui.Image image = await boundary.toImage(
-        pixelRatio: 3.0,
+        pixelRatio: 10.0,
       );
 
       ByteData byteData = await image.toByteData(
