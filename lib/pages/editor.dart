@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:share/share.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:tweetshort/styles/style.dart';
 
 import '../controller/editor_controller.dart';
 import '../extentions/extentions.dart';
@@ -217,8 +218,15 @@ class Editor extends StatelessWidget {
                                       SizedBox(
                                         height: 10,
                                       ),
-                                      Text(controller.tweet!.createdAt
-                                          .convertToData()),
+                                      Text(
+                                        controller.tweet!.createdAt
+                                            .convertToData(),
+                                        style: TextStyle(
+                                          color: TWEETSHortStyle.hexToColor(
+                                            "#7e8b95",
+                                          ),
+                                        ),
+                                      ),
                                     ],
                                   ),
                                 ),
@@ -236,8 +244,14 @@ class Editor extends StatelessWidget {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Text(controller.tweet!.createdAt
-                                      .convertToData()),
+                                  Text(
+                                    controller.tweet!.createdAt.convertToData(),
+                                    style: TextStyle(
+                                      color: TWEETSHortStyle.hexToColor(
+                                        "#7e8b95",
+                                      ),
+                                    ),
+                                  ),
                                 ],
                               ),
                               SizedBox(
@@ -257,7 +271,14 @@ class Editor extends StatelessWidget {
                                       SizedBox(
                                         width: 4,
                                       ),
-                                      Text("Retweet")
+                                      Text(
+                                        "Retweet",
+                                        style: TextStyle(
+                                          color: TWEETSHortStyle.hexToColor(
+                                            "#7e8b95",
+                                          ),
+                                        ),
+                                      )
                                     ],
                                   ),
                                   SizedBox(
@@ -275,7 +296,14 @@ class Editor extends StatelessWidget {
                                       SizedBox(
                                         width: 4,
                                       ),
-                                      Text("Likes")
+                                      Text(
+                                        "Likes",
+                                        style: TextStyle(
+                                          color: TWEETSHortStyle.hexToColor(
+                                            "#7e8b95",
+                                          ),
+                                        ),
+                                      )
                                     ],
                                   )
                                 ],
@@ -312,6 +340,8 @@ class Editor extends StatelessWidget {
                                     width: 50,
                                   ),
                                 ),
+
+                                ///#7e8b95
                               )
                               .toList(),
                         ),

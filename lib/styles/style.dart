@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class TWEETSHortStyle {
+  static Color hexToColor(String code) {
+    return Color(int.parse(code.substring(1, 7), radix: 16) + 0xFF000000);
+  }
+
   static void successSnackBar(String title, String message,
       {postion = SnackPosition.BOTTOM}) {
     ScaffoldMessenger.of(Get.context!).showSnackBar(
