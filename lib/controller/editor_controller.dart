@@ -57,7 +57,6 @@ class EditorController extends GetxController {
       String errorMessage = ApiError.convertExceptionToString(e as Exception);
       appState = AppState.error;
       TWEETSHortStyle.errorSnackBar(
-        "Error",
         errorMessage,
       );
     }
@@ -87,6 +86,11 @@ class EditorController extends GetxController {
 
   void saveScreenshot() async {
     try {
+      TWEETSHortStyle.successSnackBar(
+        "Downloading tweet.",
+        TWEETSHortStyle.download,
+      );
+
       RenderRepaintBoundary boundary =
           globalKey.currentContext!.findRenderObject() as RenderRepaintBoundary;
 
@@ -110,18 +114,15 @@ class EditorController extends GetxController {
 
       if (result['isSuccess']) {
         TWEETSHortStyle.successSnackBar(
-          "Success",
           "Tweet has been successfully saved.",
         );
       } else {
         TWEETSHortStyle.errorSnackBar(
-          "Success",
           "Tweet has been successfully saved.",
         );
       }
     } catch (e) {
       TWEETSHortStyle.errorSnackBar(
-        "Error",
         "Could not save tweet.",
       );
     }

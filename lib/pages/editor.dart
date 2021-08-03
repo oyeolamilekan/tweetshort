@@ -53,7 +53,7 @@ class Editor extends StatelessWidget {
                             horizontal: 13,
                           ),
                           margin: EdgeInsets.only(
-                            top: 6.h,
+                            top: 10.h,
                             left: 3.3.w,
                             right: 3.3.w,
                           ),

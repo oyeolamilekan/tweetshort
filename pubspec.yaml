@@ -21,6 +21,7 @@ dependencies:
   permission_handler: ^8.1.2
   share: ^2.0.4
   url_launcher: ^6.0.9
+  flutter_svg: ^0.22.0
 
 
 dev_dependencies:
@@ -40,6 +41,7 @@ flutter:
   assets:
     - assets/logo/
     - assets/fonts/
+    - assets/svg/
 
   fonts:
     - family: Poppins
