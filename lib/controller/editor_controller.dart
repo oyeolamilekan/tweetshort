@@ -30,17 +30,22 @@ class EditorController extends GetxController {
   Map? arguements =
       Get.arguments != null ? Map<String, dynamic>.from(Get.arguments) : null;
 
-  List<Color> _colors = [];
+  List<List<Color>> _colors = [];
 
   AppState appState = AppState.loading;
 
-  Color _backgroundColor = Color(
-    (Random().nextDouble() * 0xFFFFFF).toInt(),
-  ).withOpacity(1.0);
+  List<Color> _backgroundColor = [
+    Color(
+      (Random().nextDouble() * 0xFFFFFF).toInt(),
+    ).withOpacity(1.0),
+    Color(
+      (Random().nextDouble() * 0xFFFFFF).toInt(),
+    ).withOpacity(0.7),
+  ];
 
-  List<Color> get colors => _colors;
+  List<List<Color>> get colors => _colors;
 
-  Color get backgroundColor => _backgroundColor;
+  List<Color> get backgroundColor => _backgroundColor;
 
   TweetModel? tweetModel;
 
@@ -70,16 +75,21 @@ class EditorController extends GetxController {
     super.onInit();
   }
 
-  List<Color> _generateColor() {
+  List<List<Color>> _generateColor() {
     return List.generate(
       50,
-      (index) => Color(
-        (Random().nextDouble() * 0xFFFFFF).toInt(),
-      ).withOpacity(1.0),
+      (index) => [
+        Color(
+          (Random().nextDouble() * 0xFFFFFF).toInt(),
+        ).withOpacity(1.0),
+        Color(
+          (Random().nextDouble() * 0xFFFFFF).toInt(),
+        ).withOpacity(1.0)
+      ],
     );
   }
 
-  void setBackgroundColor(Color value) {
+  void setBackgroundColor(List<Color> value) {
     _backgroundColor = value;
     update();
   }

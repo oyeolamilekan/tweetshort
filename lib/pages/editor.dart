@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
@@ -38,280 +40,296 @@ class Editor extends StatelessWidget {
                   curve: Curves.fastOutSlowIn,
                   height: 100.h,
                   width: 100.w,
-                  color: controller.backgroundColor,
-                  child: Container(
-                    child: Column(
-                      children: [
-                        Container(
-                          width: 100.w,
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(5),
-                          ),
-                          padding: EdgeInsets.symmetric(
-                            vertical: 8,
-                            horizontal: 13,
-                          ),
-                          margin: EdgeInsets.only(
-                            top: 10.h,
-                            left: 3.3.w,
-                            right: 3.3.w,
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Row(
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.only(right: 8),
-                                    width: 8.w,
-                                    height: 8.w,
-                                    child: CachedNetworkImage(
-                                      imageUrl: controller.tweet!.profileImage,
-                                      imageBuilder: (context, imageProvider) =>
-                                          Container(
-                                        alignment: Alignment.topLeft,
-                                        decoration: BoxDecoration(
-                                          image: DecorationImage(
-                                            image: imageProvider,
-                                            fit: BoxFit.cover,
-                                          ),
-                                          borderRadius:
-                                              BorderRadius.circular(50),
-                                        ),
-                                      ),
-                                      placeholder: (context, url) =>
-                                          Shimmer.fromColors(
-                                        baseColor: Colors.grey[300] as Color,
-                                        highlightColor: Colors.white,
-                                        period: Duration(milliseconds: time),
-                                        child: Container(
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                        stops: [0.1, 0.5],
+                        colors: controller.backgroundColor,
+                        begin: Alignment.topRight,
+                        end: Alignment.bottomLeft,
+                        tileMode: TileMode.repeated),
+                  ),
+                  child: BackdropFilter(
+                    filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
+                    child: Container(
+                      child: Column(
+                        children: [
+                          Container(
+                            width: 100.w,
+                            decoration: BoxDecoration(
+                              color: Colors.white.withOpacity(0.7),
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                            padding: EdgeInsets.symmetric(
+                              vertical: 8,
+                              horizontal: 13,
+                            ),
+                            margin: EdgeInsets.only(
+                              top: 10.h,
+                              left: 3.3.w,
+                              right: 3.3.w,
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
+                                  children: [
+                                    Container(
+                                      margin: EdgeInsets.only(right: 8),
+                                      width: 8.w,
+                                      height: 8.w,
+                                      child: CachedNetworkImage(
+                                        imageUrl:
+                                            controller.tweet!.profileImage,
+                                        imageBuilder:
+                                            (context, imageProvider) =>
+                                                Container(
+                                          alignment: Alignment.topLeft,
                                           decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.circular(
-                                              50,
+                                            image: DecorationImage(
+                                              image: imageProvider,
+                                              fit: BoxFit.cover,
                                             ),
-                                            color: Colors.grey,
+                                            borderRadius:
+                                                BorderRadius.circular(50),
                                           ),
                                         ),
-                                      ),
-                                      errorWidget: (context, url, error) =>
-                                          Icon(Icons.error),
-                                    ),
-                                  ),
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        controller.tweet!.tileName
-                                            .utf8convert(),
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.w600,
-                                        ),
-                                      ),
-                                      Text(
-                                        "@${controller.tweet!.username.utf8convert()}",
-                                        style: TextStyle(
-                                          color: Colors.grey.shade500,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Text(
-                                controller.tweet!.fullText.utf8convert(),
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodyText1
-                                    ?.copyWith(
-                                      fontWeight: FontWeight.w400,
-                                    ),
-                              ),
-                              if (controller.tweet?.isQuoteStatus ?? false)
-                                Container(
-                                  width: 100.w,
-                                  padding: EdgeInsets.all(10),
-                                  margin: EdgeInsets.symmetric(vertical: 10),
-                                  decoration: BoxDecoration(
-                                    border: Border.all(
-                                      color: Colors.grey.withOpacity(0.3),
-                                    ),
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Row(
-                                        children: [
-                                          Container(
-                                            margin: EdgeInsets.only(right: 8),
-                                            width: 8.w,
-                                            height: 8.w,
-                                            child: CachedNetworkImage(
-                                              imageUrl: controller.tweet!
-                                                  .quotedTweet!.profileImage,
-                                              imageBuilder:
-                                                  (context, imageProvider) =>
-                                                      Container(
-                                                alignment: Alignment.topLeft,
-                                                decoration: BoxDecoration(
-                                                  image: DecorationImage(
-                                                    image: imageProvider,
-                                                    fit: BoxFit.cover,
-                                                  ),
-                                                  borderRadius:
-                                                      BorderRadius.circular(50),
-                                                ),
+                                        placeholder: (context, url) =>
+                                            Shimmer.fromColors(
+                                          baseColor: Colors.grey[300] as Color,
+                                          highlightColor: Colors.white,
+                                          period: Duration(milliseconds: time),
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(
+                                                50,
                                               ),
-                                              placeholder: (context, url) =>
-                                                  Shimmer.fromColors(
-                                                baseColor:
-                                                    Colors.grey[300] as Color,
-                                                highlightColor: Colors.white,
-                                                period: Duration(
-                                                    milliseconds: time),
-                                                child: Container(
+                                              color: Colors.grey,
+                                            ),
+                                          ),
+                                        ),
+                                        errorWidget: (context, url, error) =>
+                                            Icon(Icons.error),
+                                      ),
+                                    ),
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          controller.tweet!.tileName
+                                              .utf8convert(),
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.w600,
+                                          ),
+                                        ),
+                                        Text(
+                                          "@${controller.tweet!.username.utf8convert()}",
+                                          style: TextStyle(
+                                            color: Colors.grey.shade500,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Text(
+                                  controller.tweet!.fullText.utf8convert(),
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodyText1
+                                      ?.copyWith(
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                ),
+                                if (controller.tweet?.isQuoteStatus ?? false)
+                                  Container(
+                                    width: 100.w,
+                                    padding: EdgeInsets.all(10),
+                                    margin: EdgeInsets.symmetric(vertical: 10),
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                        color: Colors.grey.withOpacity(0.3),
+                                      ),
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Container(
+                                              margin: EdgeInsets.only(right: 8),
+                                              width: 8.w,
+                                              height: 8.w,
+                                              child: CachedNetworkImage(
+                                                imageUrl: controller.tweet!
+                                                    .quotedTweet!.profileImage,
+                                                imageBuilder:
+                                                    (context, imageProvider) =>
+                                                        Container(
+                                                  alignment: Alignment.topLeft,
                                                   decoration: BoxDecoration(
+                                                    image: DecorationImage(
+                                                      image: imageProvider,
+                                                      fit: BoxFit.cover,
+                                                    ),
                                                     borderRadius:
                                                         BorderRadius.circular(
-                                                      50,
-                                                    ),
-                                                    color: Colors.grey,
+                                                            50),
                                                   ),
                                                 ),
+                                                placeholder: (context, url) =>
+                                                    Shimmer.fromColors(
+                                                  baseColor:
+                                                      Colors.grey[300] as Color,
+                                                  highlightColor: Colors.white,
+                                                  period: Duration(
+                                                      milliseconds: time),
+                                                  child: Container(
+                                                    decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                        50,
+                                                      ),
+                                                      color: Colors.grey,
+                                                    ),
+                                                  ),
+                                                ),
+                                                errorWidget:
+                                                    (context, url, error) =>
+                                                        Icon(Icons.error),
                                               ),
-                                              errorWidget:
-                                                  (context, url, error) =>
-                                                      Icon(Icons.error),
                                             ),
-                                          ),
-                                          Text(
-                                            "${controller.tweet!.quotedTweet!.tileName.utf8convert().truncateText()}",
-                                            overflow: TextOverflow.ellipsis,
-                                            style: TextStyle(
-                                              fontWeight: FontWeight.w600,
+                                            Text(
+                                              "${controller.tweet!.quotedTweet!.tileName.utf8convert().truncateText()}",
+                                              overflow: TextOverflow.ellipsis,
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.w600,
+                                              ),
                                             ),
-                                          ),
-                                          SizedBox(
-                                            width: 10,
-                                          ),
-                                          Text(
-                                            "@${controller.tweet!.quotedTweet!.username.utf8convert().truncateText()}",
-                                            overflow: TextOverflow.ellipsis,
-                                            style: TextStyle(
-                                              color: Colors.grey.shade500,
+                                            SizedBox(
+                                              width: 10,
                                             ),
-                                          ),
-                                        ],
-                                      ),
-                                      SizedBox(
-                                        height: 10,
-                                      ),
-                                      Text(controller
-                                          .tweet!.quotedTweet!.fullText
-                                          .utf8convert()),
-                                      SizedBox(
-                                        height: 10,
-                                      ),
-                                      Text(
-                                        controller.tweet!.createdAt
-                                            .convertToData(),
-                                        style: TextStyle(
-                                          color: TWEETSHortStyle.hexToColor(
-                                            "#7e8b95",
+                                            Text(
+                                              "@${controller.tweet!.quotedTweet!.username.utf8convert().truncateText()}",
+                                              overflow: TextOverflow.ellipsis,
+                                              style: TextStyle(
+                                                color: Colors.grey.shade500,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          height: 10,
+                                        ),
+                                        Text(controller
+                                            .tweet!.quotedTweet!.fullText
+                                            .utf8convert()),
+                                        SizedBox(
+                                          height: 10,
+                                        ),
+                                        Text(
+                                          controller.tweet!.createdAt
+                                              .convertToData(),
+                                          style: TextStyle(
+                                            color: TWEETSHortStyle.hexToColor(
+                                              "#7e8b95",
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              SizedBox(
-                                height: 1,
-                              ),
-                              if (controller.tweet!.extenedMedia.isNotEmpty)
-                                TweetImages(
-                                  extendImages: controller.tweet!.extenedMedia,
-                                ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    controller.tweet!.createdAt.convertToData(),
-                                    style: TextStyle(
-                                      color: TWEETSHortStyle.hexToColor(
-                                        "#7e8b95",
-                                      ),
+                                      ],
                                     ),
                                   ),
-                                ],
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Row(
-                                children: [
-                                  Row(
-                                    children: [
-                                      Text(
-                                        controller.tweet!.retweetCount
-                                            .toString(),
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.w700,
+                                SizedBox(
+                                  height: 1,
+                                ),
+                                if (controller.tweet!.extenedMedia.isNotEmpty)
+                                  TweetImages(
+                                    extendImages:
+                                        controller.tweet!.extenedMedia,
+                                  ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      controller.tweet!.createdAt
+                                          .convertToData(),
+                                      style: TextStyle(
+                                        color: TWEETSHortStyle.hexToColor(
+                                          "#7e8b95",
                                         ),
                                       ),
-                                      SizedBox(
-                                        width: 4,
-                                      ),
-                                      Text(
-                                        "Retweet",
-                                        style: TextStyle(
-                                          color: TWEETSHortStyle.hexToColor(
-                                            "#7e8b95",
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Row(
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Text(
+                                          controller.tweet!.retweetCount
+                                              .toString(),
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.w700,
                                           ),
                                         ),
-                                      )
-                                    ],
-                                  ),
-                                  SizedBox(
-                                    width: 3.w,
-                                  ),
-                                  Row(
-                                    children: [
-                                      Text(
-                                        controller.tweet!.favoriteCount
-                                            .toString(),
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.w700,
+                                        SizedBox(
+                                          width: 4,
                                         ),
-                                      ),
-                                      SizedBox(
-                                        width: 4,
-                                      ),
-                                      Text(
-                                        "Likes",
-                                        style: TextStyle(
-                                          color: TWEETSHortStyle.hexToColor(
-                                            "#7e8b95",
+                                        Text(
+                                          "Retweet",
+                                          style: TextStyle(
+                                            color: TWEETSHortStyle.hexToColor(
+                                              "#7e8b95",
+                                            ),
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      width: 3.w,
+                                    ),
+                                    Row(
+                                      children: [
+                                        Text(
+                                          controller.tweet!.favoriteCount
+                                              .toString(),
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.w700,
                                           ),
                                         ),
-                                      )
-                                    ],
-                                  )
-                                ],
-                              )
-                            ],
+                                        SizedBox(
+                                          width: 4,
+                                        ),
+                                        Text(
+                                          "Likes",
+                                          style: TextStyle(
+                                            color: TWEETSHortStyle.hexToColor(
+                                              "#7e8b95",
+                                            ),
+                                          ),
+                                        )
+                                      ],
+                                    )
+                                  ],
+                                )
+                              ],
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ),
@@ -336,7 +354,13 @@ class Editor extends StatelessWidget {
                                 (e) => InkWell(
                                   onTap: () => controller.setBackgroundColor(e),
                                   child: Container(
-                                    color: e,
+                                    decoration: BoxDecoration(
+                                      gradient: LinearGradient(
+                                        colors: e,
+                                        begin: Alignment.topRight,
+                                        end: Alignment.bottomLeft,
+                                      ),
+                                    ),
                                     width: 50,
                                   ),
                                 ),
